@@ -1,7 +1,5 @@
 // 八字神煞規則表 + 純前端計算器
 // 注意：神煞各派查法可能不同。本檔只收錄常見子平八字排盤查表，且只輸出命中位置，不加入命理解讀。
-(function (global) {
-  "use strict";
 
   const STEMS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
   const BRANCHES = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
@@ -463,6 +461,5 @@
     };
   }
 
-  global.SHEN_SHA_RULES = SHEN_SHA_RULES;
   global.calculateShenSha = calculateShenSha;
-})(typeof window !== "undefined" ? window : globalThis);
+})(typeof window !== "undefined" ? window : export
