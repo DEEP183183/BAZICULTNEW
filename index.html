@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>純前端八字排盤 MVP｜神煞｜Master6五行進退氣</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>純前端八字排盤 MVP｜神煞｜Master6五行進退氣</h1>
+      <p class="subtitle">無後端、無 API、無登入、無付款、無資料庫；所有排盤計算都在瀏覽器 JavaScript 完成。</p>
+      <div class="badge-row">
+        <span class="badge">年柱：立春為界</span>
+        <span class="badge">月柱：十二節為界</span>
+        <span class="badge">日柱：曆法庫</span>
+        <span class="badge">大運：三日一歲</span>
+        <span class="badge">神煞：純前端查表</span>
+        <span class="badge">五行：24節氣進退氣</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="card-inner">
+          <h2>出生資料</h2>
+          <form id="baziForm">
+            <label>
+              公曆出生日期
+              <input id="birthDate" name="birthDate" type="date" required value="1990-02-04" />
+            </label>
+
+            <label>
+              出生時間
+              <input id="birthTime" name="birthTime" type="time" step="60" required value="10:30" />
+            </label>
+
+            <div class="two">
+              <label>
+                性別
+                <select id="gender" name="gender" required>
+                  <option value="male">男</option>
+                  <option value="female">女</option>
+                </select>
+              </label>
+
+              <label>
+                時區
+                <select id="timezone" name="timezone" required>
+                  <option value="Asia/Taipei" selected>Asia/Taipei</option>
+                  <option value="Asia/Hong_Kong">Asia/Hong_Kong</option>
+                  <option value="Asia/Shanghai">Asia/Shanghai</option>
+                  <option value="Asia/Singapore">Asia/Singapore</option>
+                  <option value="Asia/Tokyo">Asia/Tokyo</option>
+                  <option value="UTC">UTC</option>
+                  <option value="America/Los_Angeles">America/Los_Angeles</option>
+                  <option value="America/New_York">America/New_York</option>
+                  <option value="Europe/London">Europe/London</option>
+                  <option value="Australia/Sydney">Australia/Sydney</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="check">
+              <input id="useTrueSolarTime" name="useTrueSolarTime" type="checkbox" />
+              <span>預留 useTrueSolarTime 欄位；第一版不做真太陽時校正。</span>
+            </label>
+
+            <button type="submit">立即排盤</button>
+            <p class="hint">第一版只排盤，不加入任何命理解讀文字。</p>
+            <div id="error" class="error"></div>
+          </form>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-inner">
+          <h2>排盤結果</h2>
+          <div id="result" class="result">
+            <div class="empty">請輸入出生資料後排盤。</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="./lunar.js"></script>
+  <script src="./shensha.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
