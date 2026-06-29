@@ -47,25 +47,9 @@
 
               <label>
                 時區
-                <select id="timezone" name="timezone" required>
-                  <option value="Asia/Taipei" selected>Asia/Taipei</option>
-                  <option value="Asia/Hong_Kong">Asia/Hong_Kong</option>
-                  <option value="Asia/Shanghai">Asia/Shanghai</option>
-                  <option value="Asia/Singapore">Asia/Singapore</option>
-                  <option value="Asia/Tokyo">Asia/Tokyo</option>
-                  <option value="UTC">UTC</option>
-                  <option value="America/Los_Angeles">America/Los_Angeles</option>
-                  <option value="America/New_York">America/New_York</option>
-                  <option value="Europe/London">Europe/London</option>
-                  <option value="Australia/Sydney">Australia/Sydney</option>
-                </select>
+               
               </label>
             </div>
-
-            <label class="check">
-              <input id="useTrueSolarTime" name="useTrueSolarTime" type="checkbox" />
-              <span>預留 useTrueSolarTime 欄位；第一版不做真太陽時校正。</span>
-            </label>
 
             <button type="submit">立即排盤</button>
             <p class="hint">第一版只排盤，不加入任何命理解讀文字。</p>
@@ -85,8 +69,7 @@
     </div>
   </main>
 
-  <script src="./lunar.js"></script>
-  <script src="./shensha.js"></script>
-  <script src="./app.js"></script>
+<script src="./lunar.js"></script>
+<script type="module" src="./app.js"></script>
 </body>
 </html>
