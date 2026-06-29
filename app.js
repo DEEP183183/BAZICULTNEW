@@ -730,7 +730,6 @@ function calculateBazi(request) {
     note: [
       "第一版不加入命理解讀文字。",
       "年柱以立春交接時刻為界，月柱以十二節交接時刻為界。",
-      "useTrueSolarTime 已預留，但第一版不作真太陽時校正。",
       "五行分佈採 Master6 24節氣進退氣倍率：先計天干、地支、藏干原始分數，再按實際節氣進度線性插值修正。",
       "神煞採常見子平八字查表，只顯示命中位置與查法，不加入命理解讀。",
       "日柱採用 lunar-javascript 曆法庫計算；本版不套用 23:00 晚子時換日規則。"
@@ -984,7 +983,6 @@ function getFormRequest(form) {
     birthTime: form.birthTime.value,
     gender: form.gender.value,
     timezone: form.timezone.value,
-    useTrueSolarTime: form.useTrueSolarTime.checked
   };
 }
 
