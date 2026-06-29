@@ -1,4 +1,5 @@
-// 純前端八字排盤 MVP
+import { SHEN_SHA_RULES } from './shensha.js';
+// Master6八字排盤
 // 依賴：同資料夾的 lunar.js，會提供全域 Solar 物件。
 
 // =========================
