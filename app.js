@@ -1009,3 +1009,14 @@ try {
 } catch (error) {
   showError(error && error.message ? error.message : String(error));
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const tzSelect = document.getElementById("timezone");
+  if (tzSelect) {
+    const timezones = Intl.supportedValuesOf('timeZone');
+    const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    tzSelect.innerHTML = timezones.map(tz => 
+      `<option value="${tz}" ${tz === userTz ? 'selected' : ''}>${tz}</option>`
+    ).join('');
+  }
+});
