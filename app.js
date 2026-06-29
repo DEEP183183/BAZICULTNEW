@@ -1,5 +1,6 @@
-import { SHEN_SHA_RULES } from './shensha.js';
-// Master6八字排盤
+import { SHEN_SHA_RULES, calculateShenSha } from './shensha.js';
+
+// 純前端八字排盤 MVP
 // 依賴：同資料夾的 lunar.js，會提供全域 Solar 物件。
 
 // =========================
@@ -190,8 +191,7 @@ function parseBirthInput(input) {
     minute,
     second,
     timezone,
-    gender: input.gender,
-    useTrueSolarTime: Boolean(input.useTrueSolarTime)
+    gender: input.gender
   };
 }
 
@@ -310,19 +310,17 @@ function findSolarTermInTable(table, term, year) {
   const expectedNames = new Set(term.names.map(normalizeSolarTermName));
 
   // lunar-javascript 通常用簡體中文做 key，例如「惊蛰」「芒种」。
-  // 舊版/不同打包方式可能會出現繁體 key，所以先用 aliases 直接取。
+  // 舊版/不同打包方式可能會出現繁體 key，直接取。
   for (const name of term.names) {
     if (table[name] && solarYearFromSolar(table[name]) === year) return table[name];
   }
 
-  // 再掃描整張節氣表，處理簡繁差異。避免硬編碼「驚蟄」導致搵唔到「惊蛰」。
   for (const [name, solar] of Object.entries(table)) {
     if (expectedNames.has(normalizeSolarTermName(name)) && solarYearFromSolar(solar) === year) {
       return solar;
     }
   }
 
-  // 最後才試英文 enum key；部分 enum key 會指向上一年/下一年，所以一定要核對年份。
   if (table[term.key] && solarYearFromSolar(table[term.key]) === year) return table[term.key];
 
   return null;
@@ -730,6 +728,7 @@ function calculateBazi(request) {
     note: [
       "第一版不加入命理解讀文字。",
       "年柱以立春交接時刻為界，月柱以十二節交接時刻為界。",
+      "useTrueSolarTime 已預留，但第一版不作真太陽時校正。",
       "五行分佈採 Master6 24節氣進退氣倍率：先計天干、地支、藏干原始分數，再按實際節氣進度線性插值修正。",
       "神煞採常見子平八字查表，只顯示命中位置與查法，不加入命理解讀。",
       "日柱採用 lunar-javascript 曆法庫計算；本版不套用 23:00 晚子時換日規則。"
@@ -982,7 +981,7 @@ function getFormRequest(form) {
     birthDate: form.birthDate.value,
     birthTime: form.birthTime.value,
     gender: form.gender.value,
-    timezone: form.timezone.value,
+    timezone: form.timezone.value
   };
 }
 
@@ -1009,6 +1008,7 @@ try {
 } catch (error) {
   showError(error && error.message ? error.message : String(error));
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   const tzSelect = document.getElementById("timezone");
   if (tzSelect) {
